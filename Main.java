@@ -64,38 +64,60 @@ public class Main {
         System.out.println("1. Full-time");
         System.out.println("2. Internship");
 
-        String type = prompt("Choose a type: ");
+        String choice = prompt("Choose a type: ");
         String id = prompt("Enter application id: ");
         String position = prompt("Enter position: ");
         String jobType = prompt("Enter job type: ");
         String startDate = prompt("Enter start date: ");
-
         ApplicationStatus status = ApplicationStatus.APPLIED;
 
-        if (type.equals("1")) {
+        Application app = null;
+
+        if (choice.equals("1")) {
             int salary = promptInt("Enter salary: ");
             String experience = prompt("Enter experience: ");
 
-            FullTimeApplication app = new FullTimeApplication(
-                    id, position, jobType, startDate, status, salary, experience
+            app = ApplicationFactory.createApplication(
+                    "fulltime",
+                    id,
+                    position,
+                    jobType,
+                    startDate,
+                    status,
+                    salary,
+                    experience,
+                    0,
+                    0,
+                    ""
             );
 
-            manager.addApplication(app);
             System.out.println("Full-time application added.");
-        } else if (type.equals("2")) {
+        } else if (choice.equals("2")) {
             int academicCredit = promptInt("Enter academic credit: ");
             int recommendedGPA = promptInt("Enter recommended GPA: ");
             String recommendedMajor = prompt("Enter recommended major: ");
 
-            InternshipApplication app = new InternshipApplication(
-                    id, position, jobType, startDate, status,
-                    academicCredit, recommendedGPA, recommendedMajor
+            app = ApplicationFactory.createApplication(
+                    "internship",
+                    id,
+                    position,
+                    jobType,
+                    startDate,
+                    status,
+                    0,
+                    "",
+                    academicCredit,
+                    recommendedGPA,
+                    recommendedMajor
             );
 
-            manager.addApplication(app);
             System.out.println("Internship application added.");
         } else {
             System.out.println("Invalid application type.");
+        }
+
+        if (app != null) {
+            manager.addApplication(app);
         }
     }
 

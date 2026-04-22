@@ -26,7 +26,11 @@ public class InternshipApplication extends Application {
 
     @Override
     public String save() {
-        return id + "," + position + "," + jobType + "," + startDate + "," + status + ","
-                + academicCredit + "," + recommendedGPA + "," + recommendedMajor;
+        return super.save() + "," + academicCredit + "," + recommendedGPA + "," + recommendedMajor;
+    }
+
+    @Override
+    public String toString() {
+        return "InternshipApplication: " + save();
     }
 }
