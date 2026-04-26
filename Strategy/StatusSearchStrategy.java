@@ -1,5 +1,9 @@
+package Strategy;
 import java.util.ArrayList;
 import java.util.List;
+
+import Interfaces.IApplication;
+import Interfaces.ISearchStrategy;
 
 public class StatusSearchStrategy implements ISearchStrategy {
     @Override
