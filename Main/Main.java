@@ -1,5 +1,12 @@
+package Main;
 import java.util.List;
 import java.util.Scanner;
+
+import Factory.ApplicationFactory;
+import Factory.ApplicationManager;
+import Interfaces.IApplication;
+import Model.Application;
+import Model.ApplicationStatus;
 
 public class Main {
     private final ApplicationManager manager;
