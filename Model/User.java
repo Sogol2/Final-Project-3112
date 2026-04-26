@@ -1,3 +1,6 @@
+package Model;
+import Interfaces.IUserAuth;
+
 public abstract class User implements IUserAuth {
     protected String userID;
     protected String name;

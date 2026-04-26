@@ -1,5 +1,8 @@
+package Model;
 import java.util.ArrayList;
 import java.util.List;
+
+import Interfaces.INotification;
 
 public class Student extends User {
     private String firstName;

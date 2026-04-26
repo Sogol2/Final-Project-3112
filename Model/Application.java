@@ -1,3 +1,6 @@
+package Model;
+import Interfaces.IApplication; 
+
 public abstract class Application implements IApplication {
     protected String id;
     protected String position;

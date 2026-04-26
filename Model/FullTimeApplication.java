@@ -1,3 +1,5 @@
+package Model;
+
 public class FullTimeApplication extends Application {
     private int salary;
     private String experience;
