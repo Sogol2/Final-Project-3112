@@ -38,8 +38,11 @@ public class Main {
                     manager.displaySummary();
                     break;
                 case "6":
+                    searchApplications();
+                    break;
+                case "7":
                     running = false;
-                    System.out.println("Goodbye!");
+                    System.out.println("Exiting application. Goodbye!");
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");
@@ -55,7 +58,8 @@ public class Main {
         System.out.println("3. Update application status");
         System.out.println("4. Delete application");
         System.out.println("5. View summary");
-        System.out.println("6. Exit");
+        System.out.println("6. Search applications");
+        System.out.println("7. Exit");
     }
 
     private void addApplication() {
@@ -146,6 +150,36 @@ public class Main {
         String id = prompt("Enter application id: ");
         manager.removeApplication(id);
         System.out.println("Application deleted.");
+    }
+
+    private void searchApplications() {
+        System.out.println("\nSearch by:");
+        System.out.println("1. Company");
+        System.out.println("2. Status");
+
+        String choice = prompt("Choose: ");
+        String query = prompt("Enter search query: ");
+
+        ISearchStrategy strategy;
+
+        if (choice.equals("1")) {
+            strategy = new CompanySearchStrategy();
+        } else if (choice.equals("2")) {
+            strategy = new StatusSearchStrategy();
+        } else {
+            System.out.println("Invalid option.");
+            return;
+        }
+
+        List<IApplication> results = manager.search(strategy, query);
+
+        if (results.isEmpty()) {
+            System.out.println("No results found.");
+        } else {
+            for (IApplication app : results) {
+                System.out.println(app);
+            }
+        }
     }
 
     private ApplicationStatus promptStatus() {
