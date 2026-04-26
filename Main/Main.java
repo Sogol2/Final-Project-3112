@@ -3,8 +3,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import Factory.ApplicationFactory;
-import Factory.ApplicationManager;
 import Interfaces.IApplication;
+import Manager.ApplicationManager;
 import Model.Application;
 import Model.ApplicationStatus;
 
