@@ -82,4 +82,11 @@ public class ApplicationManager {
         System.out.println("Rejected: " + rejected);
         System.out.println("Accepted: " + accepted);
     }
+
+    public List<IApplication> search(ISearchStrategy strategy, String query) {
+        if (strategy == null || query == null) {
+            return new ArrayList<>();
+        }
+        return strategy.search(applications, query);
+    }
 }
