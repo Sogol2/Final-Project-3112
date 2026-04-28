@@ -1,12 +1,22 @@
 package Main;
+
 import java.util.List;
 import java.util.Scanner;
 
 import Factory.ApplicationFactory;
 import Interfaces.IApplication;
+import Interfaces.INotification;
 import Manager.ApplicationManager;
 import Model.Application;
 import Model.ApplicationStatus;
+import Model.Company;
+import Model.Student;
+import Model.User;
+import Notification.ConsoleNotification;
+import Strategy.CompanySearchStrategy;
+import Interfaces.ISearchStrategy;
+import Strategy.StatusSearchStrategy;
+
 
 public class Main {
     private final ApplicationManager manager;

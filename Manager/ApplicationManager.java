@@ -1,9 +1,12 @@
 package Manager;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import Interfaces.IApplication;
+import Interfaces.ISearchStrategy;
 import Model.ApplicationStatus;
+
 
 public class ApplicationManager {
     private static ApplicationManager instance;
