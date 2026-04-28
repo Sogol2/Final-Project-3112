@@ -1,3 +1,4 @@
+package Model;
 public class Company extends User {
     private String companyName;
 

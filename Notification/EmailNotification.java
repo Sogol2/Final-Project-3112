@@ -1,3 +1,6 @@
+package Notification;
+import Interfaces.INotification;
+
 public class EmailNotification implements INotification {
     
     @Override

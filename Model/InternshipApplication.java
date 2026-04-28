@@ -1,3 +1,5 @@
+package Model;
+
 public class InternshipApplication extends Application {
     private int academicCredit;
     private int recommendedGPA;

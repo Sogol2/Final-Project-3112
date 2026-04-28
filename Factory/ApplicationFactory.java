@@ -1,3 +1,9 @@
+package Factory;
+import Model.Application;
+import Model.ApplicationStatus;
+import Model.FullTimeApplication;
+import Model.InternshipApplication;
+
 public class ApplicationFactory {
 
     public static Application createApplication(

@@ -1,3 +1,6 @@
+package Interfaces;
+import Model.ApplicationStatus;
+
 public interface IApplication {
     String getId();
     String getPosition();
