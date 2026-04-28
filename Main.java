@@ -5,9 +5,37 @@ public class Main {
     private final ApplicationManager manager;
     private final Scanner scanner;
 
+    private final Student student;
+    private final Company company;
+    private User currentUser;
+
     public Main() {
         manager = ApplicationManager.getInstance();
         scanner = new Scanner(System.in);
+
+        INotification notifier = new ConsoleNotification();
+
+        student = new Student(
+            "Student User",
+            "student1",
+            "1234",
+            "Test",
+            "Student",
+            3.8,
+            "Computer Science",
+            2026,
+            notifier
+    );
+    
+
+        company = new Company(
+                "Company User",
+                "company1",
+                "1234",
+                "Google"
+        );
+
+        currentUser = null;
     }
 
     public static void main(String[] args) {
@@ -18,48 +46,133 @@ public class Main {
         boolean running = true;
 
         while (running) {
-            printMenu();
-            String choice = prompt("Choose an option: ");
-
-            switch (choice) {
-                case "1":
-                    addApplication();
-                    break;
-                case "2":
-                    viewAllApplications();
-                    break;
-                case "3":
-                    updateApplicationStatus();
-                    break;
-                case "4":
-                    deleteApplication();
-                    break;
-                case "5":
-                    manager.displaySummary();
-                    break;
-                case "6":
-                    searchApplications();
-                    break;
-                case "7":
-                    running = false;
-                    System.out.println("Exiting application. Goodbye!");
-                    break;
-                default:
-                    System.out.println("Invalid option. Please try again.");
+            if (currentUser == null) {
+                running = showLoginMenu();
+            } else if (currentUser instanceof Student) {
+                showStudentMenu();
+            } else if (currentUser instanceof Company) {
+                showCompanyMenu();
             }
         }
     }
 
-    private void printMenu() {
+    private boolean showLoginMenu() {
         System.out.println();
         System.out.println("==== Job Application Tracker ====");
+        System.out.println("1. Login as Student");
+        System.out.println("2. Login as Company");
+        System.out.println("3. Exit");
+
+        String choice = prompt("Choose an option: ");
+
+        switch (choice) {
+            case "1":
+                loginStudent();
+                return true;
+            case "2":
+                loginCompany();
+                return true;
+            case "3":
+                System.out.println("Exiting application. Goodbye!");
+                return false;
+            default:
+                System.out.println("Invalid option. Please try again.");
+                return true;
+        }
+    }
+
+    private void loginStudent() {
+        String username = prompt("Enter student user ID: ");
+        String password = prompt("Enter password: ");
+
+        if (student.login(username, password)) {
+            currentUser = student;
+            System.out.println("Student login successful.");
+        } else {
+            System.out.println("Invalid student login.");
+        }
+    }
+
+    private void loginCompany() {
+        String username = prompt("Enter company user ID: ");
+        String password = prompt("Enter password: ");
+
+        if (company.login(username, password)) {
+            currentUser = company;
+            System.out.println("Company login successful.");
+        } else {
+            System.out.println("Invalid company login.");
+        }
+    }
+
+    private void showStudentMenu() {
+        System.out.println();
+        System.out.println("==== Student Menu ====");
         System.out.println("1. Add application");
         System.out.println("2. View all applications");
-        System.out.println("3. Update application status");
-        System.out.println("4. Delete application");
-        System.out.println("5. View summary");
-        System.out.println("6. Search applications");
-        System.out.println("7. Exit");
+        System.out.println("3. Delete application");
+        System.out.println("4. View summary");
+        System.out.println("5. Search applications");
+        System.out.println("6. Logout");
+
+        String choice = prompt("Choose an option: ");
+
+        switch (choice) {
+            case "1":
+                addApplication();
+                break;
+            case "2":
+                viewAllApplications();
+                break;
+            case "3":
+                deleteApplication();
+                break;
+            case "4":
+                manager.displaySummary();
+                break;
+            case "5":
+                searchApplications();
+                break;
+            case "6":
+                logoutCurrentUser();
+                break;
+            default:
+                System.out.println("Invalid option. Please try again.");
+        }
+    }
+
+    private void showCompanyMenu() {
+        System.out.println();
+        System.out.println("==== Company Menu ====");
+        System.out.println("1. View all applications");
+        System.out.println("2. Update application status");
+        System.out.println("3. Search applications");
+        System.out.println("4. Logout");
+
+        String choice = prompt("Choose an option: ");
+
+        switch (choice) {
+            case "1":
+                viewAllApplications();
+                break;
+            case "2":
+                updateApplicationStatus();
+                break;
+            case "3":
+                searchApplications();
+                break;
+            case "4":
+                logoutCurrentUser();
+                break;
+            default:
+                System.out.println("Invalid option. Please try again.");
+        }
+    }
+
+    private void logoutCurrentUser() {
+        currentUser.logout();
+        currentUser = null;
+        System.out.println("Logged out successfully.");
     }
 
     private void addApplication() {
@@ -122,6 +235,8 @@ public class Main {
 
         if (app != null) {
             manager.addApplication(app);
+            student.addApplication(app);
+            student.recieveUpdate("Application " + id + " was added successfully.");
         }
     }
 
@@ -142,8 +257,14 @@ public class Main {
         String id = prompt("Enter application id: ");
         ApplicationStatus status = promptStatus();
 
-        manager.updateApplicationStatus(id, status);
-        System.out.println("Application status updated.");
+        IApplication foundApp = manager.getApplication(id);
+
+        if (foundApp != null) {
+            company.postStatus((Application) foundApp, status, student);
+            System.out.println("Application status updated.");
+        } else {
+            System.out.println("Application not found.");
+        }
     }
 
     private void deleteApplication() {
