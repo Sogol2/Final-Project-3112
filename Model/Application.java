@@ -3,13 +3,15 @@ import Interfaces.IApplication;
 
 public abstract class Application implements IApplication {
     protected String id;
+    protected String companyName;
     protected String position;
     protected String jobType;
     protected String startDate;
     protected ApplicationStatus status;
 
-    public Application(String id, String position, String jobType, String startDate, ApplicationStatus status) {
+    public Application(String id, String companyName, String position, String jobType, String startDate, ApplicationStatus status) {
         this.id = id;
+        this.companyName = companyName;
         this.position = position;
         this.jobType = jobType;
         this.startDate = startDate;
@@ -19,6 +21,11 @@ public abstract class Application implements IApplication {
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    public String getCompanyName() {
+        return companyName;
     }
 
     @Override

@@ -1,9 +1,8 @@
 package Strategy;
-import java.util.ArrayList;
-import java.util.List;
-
 import Interfaces.IApplication;
 import Interfaces.ISearchStrategy;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CompanySearchStrategy implements ISearchStrategy {
     @Override
@@ -13,7 +12,7 @@ public class CompanySearchStrategy implements ISearchStrategy {
 
         for (IApplication app : apps) {
             if (app.getPosition().toLowerCase().contains(searchTerm)
-                    || app.getJobType().toLowerCase().contains(searchTerm)) {
+                    || app.getCompanyName().toLowerCase().contains(searchTerm)) {
                 results.add(app);
             }
         }

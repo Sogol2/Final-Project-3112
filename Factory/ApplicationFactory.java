@@ -9,6 +9,7 @@ public class ApplicationFactory {
     public static Application createApplication(
             String type,
             String id,
+            String companyName,
             String position,
             String jobType,
             String startDate,
@@ -20,9 +21,9 @@ public class ApplicationFactory {
             String recommendedMajor
     ) {
         if (type.equalsIgnoreCase("fulltime")) {
-            return new FullTimeApplication(id, position, jobType, startDate, status, salary, experience);
+            return new FullTimeApplication(id, companyName, position, jobType, startDate, status, salary, experience);
         } else if (type.equalsIgnoreCase("internship")) {
-            return new InternshipApplication(id, position, jobType, startDate, status,
+            return new InternshipApplication(id, companyName, position, jobType, startDate, status,
                     academicCredit, recommendedGPA, recommendedMajor);
         } else {
             return null;

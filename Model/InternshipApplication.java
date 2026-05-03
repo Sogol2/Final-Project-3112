@@ -5,10 +5,10 @@ public class InternshipApplication extends Application {
     private int recommendedGPA;
     private String recommendedMajor;
 
-    public InternshipApplication(String id, String position, String jobType, String startDate,
+    public InternshipApplication(String id, String companyName, String position, String jobType, String startDate,
                                  ApplicationStatus status, int academicCredit,
                                  int recommendedGPA, String recommendedMajor) {
-        super(id, position, jobType, startDate, status);
+        super(id, companyName, position, jobType, startDate, status);
         this.academicCredit = academicCredit;
         this.recommendedGPA = recommendedGPA;
         this.recommendedMajor = recommendedMajor;

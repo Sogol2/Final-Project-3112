@@ -1,11 +1,9 @@
 package Main;
 
-import java.util.List;
-import java.util.Scanner;
-
 import Factory.ApplicationFactory;
 import Interfaces.IApplication;
 import Interfaces.INotification;
+import Interfaces.ISearchStrategy;
 import Manager.ApplicationManager;
 import Model.Application;
 import Model.ApplicationStatus;
@@ -14,8 +12,9 @@ import Model.Student;
 import Model.User;
 import Notification.ConsoleNotification;
 import Strategy.CompanySearchStrategy;
-import Interfaces.ISearchStrategy;
 import Strategy.StatusSearchStrategy;
+import java.util.List;
+import java.util.Scanner;
 
 
 public class Main {
@@ -200,6 +199,7 @@ public class Main {
 
         String choice = prompt("Choose a type: ");
         String id = prompt("Enter application id: ");
+        String companyName = prompt("Enter company name: ");
         String position = prompt("Enter position: ");
         String jobType = prompt("Enter job type: ");
         String startDate = prompt("Enter start date: ");
@@ -214,6 +214,7 @@ public class Main {
             app = ApplicationFactory.createApplication(
                     "fulltime",
                     id,
+                    companyName,
                     position,
                     jobType,
                     startDate,
@@ -234,6 +235,7 @@ public class Main {
             app = ApplicationFactory.createApplication(
                     "internship",
                     id,
+                    companyName,
                     position,
                     jobType,
                     startDate,

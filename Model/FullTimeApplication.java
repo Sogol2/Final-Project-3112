@@ -4,9 +4,9 @@ public class FullTimeApplication extends Application {
     private int salary;
     private String experience;
 
-    public FullTimeApplication(String id, String position, String jobType, String startDate,
+    public FullTimeApplication(String id, String companyName, String position, String jobType, String startDate,
                                ApplicationStatus status, int salary, String experience) {
-        super(id, position, jobType, startDate, status);
+        super(id, companyName, position, jobType, startDate, status);
         this.salary = salary;
         this.experience = experience;
     }
