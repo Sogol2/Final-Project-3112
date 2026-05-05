@@ -1,4 +1,5 @@
 package Model;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,31 +11,49 @@ public class Student extends User {
     private double GPA;
     private String major;
     private int graduationDate;
-    private List<Application> applications;
-
     private INotification notifier;
+    private List<String> pendingNotifications;
 
-    public Student(String name, String userID, String password, String firstName, String lastName, double GPA, String major, int graduationDate, INotification notifier) {
+    public Student(String name, String userID, String password, String firstName, String lastName,
+                   double GPA, String major, int graduationDate, INotification notifier) {
         super(userID, name, password);
         this.firstName = firstName;
         this.lastName = lastName;
         this.GPA = GPA;
         this.major = major;
         this.graduationDate = graduationDate;
-        this.applications = new ArrayList<>();
         this.notifier = notifier;
+        this.pendingNotifications = new ArrayList<>();
     }
 
-    public void addApplication(Application application) {
-        applications.add(application);
-        //notifier.notify("New application added for " + application.getCompanyName()); might remove
+    public String getProfileSummary() {
+        return firstName + " " + lastName + " | Major: " + major
+                + " | GPA: " + GPA + " | Graduation Year: " + graduationDate;
     }
 
-    public List<Application> viewApplications() {
-        return applications;
+    public void displayProfile() {
+        System.out.println("Student Profile");
+        System.out.println("Name: " + firstName + " " + lastName);
+        System.out.println("Major: " + major);
+        System.out.println("GPA: " + GPA);
+        System.out.println("Graduation Year: " + graduationDate);
     }
 
-    public void recieveUpdate(String message) {
-        notifier.notifyMessage(message);
+    public void receiveUpdate(String message) {
+        if (loggedIn) {
+            notifier.notifyMessage(message);
+        } else {
+            pendingNotifications.add(message);
+        }
+    }
+
+    public void displayPendingNotifications() {
+        if (!pendingNotifications.isEmpty()) {
+            System.out.println("\n--- Notifications ---");
+            for (String message : pendingNotifications) {
+                notifier.notifyMessage(message);
+            }
+            pendingNotifications.clear();
+        }
     }
 }
