@@ -13,6 +13,7 @@ import Model.User;
 import Notification.ConsoleNotification;
 import Strategy.CompanySearchStrategy;
 import Strategy.StatusSearchStrategy;
+import Strategy.DateSearchStrategy;
 import java.util.List;
 import java.util.Scanner;
 
@@ -104,6 +105,8 @@ public class Main {
         if (student.login(username, password)) {
             currentUser = student;
             System.out.println("Student login successful.");
+            System.out.println("Welcome, " + student.getProfileSummary());
+            student.displayPendingNotifications();
         } else {
             System.out.println("Invalid student login.");
         }
@@ -129,7 +132,8 @@ public class Main {
         System.out.println("3. Delete application");
         System.out.println("4. View summary");
         System.out.println("5. Search applications");
-        System.out.println("6. Logout");
+        System.out.println("6. View profile");
+        System.out.println("7. Logout");
 
         String choice = prompt("Choose an option: ");
 
@@ -150,6 +154,9 @@ public class Main {
                 searchApplications();
                 break;
             case "6":
+                student.displayProfile();
+                break;
+            case "7":
                 logoutCurrentUser();
                 break;
             default:
@@ -254,8 +261,7 @@ public class Main {
 
         if (app != null) {
             manager.addApplication(app);
-            student.addApplication(app);
-            student.recieveUpdate("Application " + id + " was added successfully.");
+            student.receiveUpdate("Application " + id + " was added successfully.");
         }
     }
 
@@ -274,12 +280,13 @@ public class Main {
 
     private void updateApplicationStatus() {
         String id = prompt("Enter application id: ");
-        ApplicationStatus status = promptStatus();
-
         IApplication foundApp = manager.getApplication(id);
 
         if (foundApp != null) {
-            company.postStatus((Application) foundApp, status, student);
+            ApplicationStatus status = promptStatus();
+            manager.updateApplicationStatus(id, status);
+            student.receiveUpdate("Your application for " + foundApp.getCompanyName()
+                    + " has been updated to: " + status);
             System.out.println("Application status updated.");
         } else {
             System.out.println("Application not found.");
@@ -296,6 +303,7 @@ public class Main {
         System.out.println("\nSearch by:");
         System.out.println("1. Company");
         System.out.println("2. Status");
+        System.out.println("3. Start Date");
 
         String choice = prompt("Choose: ");
         String query = prompt("Enter search query: ");
@@ -306,6 +314,8 @@ public class Main {
             strategy = new CompanySearchStrategy();
         } else if (choice.equals("2")) {
             strategy = new StatusSearchStrategy();
+        } else if (choice.equals("3")) {
+            strategy = new DateSearchStrategy();
         } else {
             System.out.println("Invalid option.");
             return;
