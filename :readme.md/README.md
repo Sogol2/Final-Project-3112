@@ -18,7 +18,7 @@ Students who apply to many jobs or internships can lose track of their applicati
 * Delete applications
 * Search applications
 * View application summary
-* Console notification when application status is updated by company
+* Console notification when application status is updated by company; notifications are queued while logged out and delivered on login
 
 ### User Roles
 
@@ -45,6 +45,10 @@ Both types inherit from the abstract parent class `Application`.
 * IUserAuth
 * INotification
 * ISearchStrategy
+
+### Assumptions and Constraints
+* Accounts are hardcoded from the beginning (one student and one company user), no creating users
+* All applications are lost when the program exits
 
 ### Default Credentials
 
