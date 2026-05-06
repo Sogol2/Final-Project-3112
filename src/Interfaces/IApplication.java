@@ -1,5 +1,5 @@
-package Interfaces;
-import Model.ApplicationStatus;
+package src.Interfaces;
+import src.Model.ApplicationStatus;
 
 public interface IApplication {
     String getId();

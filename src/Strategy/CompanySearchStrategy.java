@@ -1,8 +1,9 @@
-package Strategy;
-import Interfaces.IApplication;
-import Interfaces.ISearchStrategy;
+package src.Strategy;
 import java.util.ArrayList;
 import java.util.List;
+
+import src.Interfaces.IApplication;
+import src.Interfaces.ISearchStrategy;
 
 public class CompanySearchStrategy implements ISearchStrategy {
     @Override

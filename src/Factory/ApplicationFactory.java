@@ -1,8 +1,8 @@
-package Factory;
-import Model.Application;
-import Model.ApplicationStatus;
-import Model.FullTimeApplication;
-import Model.InternshipApplication;
+package src.Factory;
+import src.Model.Application;
+import src.Model.ApplicationStatus;
+import src.Model.FullTimeApplication;
+import src.Model.InternshipApplication;
 
 public class ApplicationFactory {
 

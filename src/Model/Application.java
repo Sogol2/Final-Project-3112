@@ -1,5 +1,5 @@
-package Model;
-import Interfaces.IApplication; 
+package src.Model;
+import src.Interfaces.IApplication; 
 
 public abstract class Application implements IApplication {
     protected String id;

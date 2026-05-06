@@ -1,11 +1,11 @@
-package Manager;
+package src.Manager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Interfaces.IApplication;
-import Interfaces.ISearchStrategy;
-import Model.ApplicationStatus;
+import src.Interfaces.IApplication;
+import src.Interfaces.ISearchStrategy;
+import src.Model.ApplicationStatus;
 
 
 public class ApplicationManager {

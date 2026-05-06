@@ -1,19 +1,20 @@
-package Main;
+package src.Main;
 
-import Factory.ApplicationFactory;
-import Interfaces.IApplication;
-import Interfaces.INotification;
-import Interfaces.ISearchStrategy;
-import Manager.ApplicationManager;
-import Model.Application;
-import Model.ApplicationStatus;
-import Model.Company;
-import Model.Student;
-import Model.User;
-import Notification.ConsoleNotification;
-import Strategy.CompanySearchStrategy;
-import Strategy.StatusSearchStrategy;
-import Strategy.DateSearchStrategy;
+import src.Factory.ApplicationFactory;
+import src.Interfaces.IApplication;
+import src.Interfaces.INotification;
+import src.Interfaces.ISearchStrategy;
+import src.Manager.ApplicationManager;
+import src.Model.Application;
+import src.Model.ApplicationStatus;
+import src.Model.Company;
+import src.Model.Student;
+import src.Model.User;
+import src.Notification.ConsoleNotification;
+import src.Strategy.CompanySearchStrategy;
+import src.Strategy.DateSearchStrategy;
+import src.Strategy.StatusSearchStrategy;
+
 import java.util.List;
 import java.util.Scanner;
 

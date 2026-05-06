@@ -1,5 +1,5 @@
-package Model;
-import Interfaces.IUserAuth;
+package src.Model;
+import src.Interfaces.IUserAuth;
 
 public abstract class User implements IUserAuth {
     protected String userID;

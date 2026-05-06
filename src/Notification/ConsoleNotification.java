@@ -1,5 +1,5 @@
-package Notification;
-import Interfaces.INotification;
+package src.Notification;
+import src.Interfaces.INotification;
 
 public class ConsoleNotification implements INotification {
     
